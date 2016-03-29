@@ -28,20 +28,31 @@
 
           for (var i = 0; i < 99; i++) {
             if(response.statuses[i].place !== null){
-              $("#location").append("<li> Find him/her @" +  "<a href=\"https://twitter.com/" + response.statuses[i].user.screen_name + "\">" +response.statuses[i].place.full_name + "</a>" + "</li>");
+              $("#location").append("<li> Find "+ response.statuses[i].user.name + " @"  +  "<a href=\"https://twitter.com/" + response.statuses[i].user.screen_name + "\">" +response.statuses[i].place.full_name + "</a>" + "</li>");
               $("#profilepic").append("<li><img src=" + response.statuses[i].user.profile_image_url + "></li>");
               $("#tweets").append("<li>" + response.statuses[i].text + "</li>");
               $("#tweets li").addClass("hide");
-              $("#profilepic:nth-child(j)").click(function(){
-                $("#tweets:nth-child(j)").toggleClass("hide");
-              });
-            }
 
             }
 
-            $("#profilepic:nth-child(j)").click(function(){
-              $("#tweets:nth-child(j)").toggleClass("hide");
-            });
+        }
+
+            // $("#profilepic:nth-child(0)").click(function(data){
+            //   console.log(data)
+            //   // $("#tweets:nth-child(j)").toggleClass("hide");
+            //
+            // });
+
+
+            $("#profilepic li").each(function(index, element){
+
+              $(element).hover(function(){
+                $("#tweets li:nth-child("+(index + 1)+")").toggleClass("hide")
+              })
+
+            })
+
+
 });
 
 
@@ -64,7 +75,13 @@
       justify-content: center;
     }
     .hide{
-      display:none;
+      color:transparent;
+      width:0px;
+
+    }
+    #profilepic{
+      position:absolute;
+      left:20%;
     }
   </style>
   <body>
