@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+    var tweet=prompt("What do you love?");
+      $.getJSON("http://cooper-union-search-proxy.herokuapp.com/twitter/search/\"love "+tweet+"\"?count=100", function(response){
+        console.log(response);
+        if (response.statuses.length>0){
+          $("h1").html("So do these people!");
+        }
+
+          else{
+              $("h1").html("You have eccentric taste!");
+        }
+
+
+
+        // for (var i = 0; i < 99; i++) {
+        //   $("#profilepic").append("<li><img src=" + response.statuses[i].user.profile_image_url + "></li>");
+        //   $("#location").append("<li> Find him/her @" +  "<a href=\"https://twitter.com/" + response.statuses[i].user.screen_name + "\">" +response.statuses[i].user.location + "</a>" + "</li>");
+        //   $("#tweets").append("<li><img src=" + response.statuses[i].user.profile_image_url + "></li>");
+        //   }
+
+
+
+
+
+          for (var i = 0; i < 99; i++) {
+            if(response.statuses[i].place !== null){
+              $("#location").append("<li> Find him/her @" +  "<a href=\"https://twitter.com/" + response.statuses[i].user.screen_name + "\">" +response.statuses[i].place.full_name + "</a>" + "</li>");
+              $("#profilepic").append("<li><img src=" + response.statuses[i].user.profile_image_url + "></li>");
+              $("#tweets").append("<li>" + response.statuses[i].text + "</li>");
+              $("#tweets li").addClass("hide");
+              $("#profilepic:nth-child(j)").click(function(){
+                $("#tweets:nth-child(j)").toggleClass("hide");
+              });
+            }
+
+            }
+
+            $("#profilepic:nth-child(j)").click(function(){
+              $("#tweets:nth-child(j)").toggleClass("hide");
+            });
+});
+
+
+
+
+    </script>
+  </head>
+  <style>
+    section{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+    li{
+      height:50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hide{
+      display:none;
+    }
+  </style>
+  <body>
+    <h1></h1>
+    <section>
+
+    <ul id="profilepic"></ul>
+    <ul id="tweets"></ul>
+    <ul id="location"></ul>
+  </section>
+
+
+  </body>
+</html>
