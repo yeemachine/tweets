@@ -7,7 +7,7 @@
       $.getJSON("http://cooper-union-search-proxy.herokuapp.com/twitter/search/\"love "+tweet+"\"?count=100", function(response){
         console.log(response);
         if (response.statuses.length>0){
-          $("h1").html("So do these people!");
+          $("h1").html("So do these people!<3");
         }
 
           else{
@@ -28,7 +28,7 @@
 
           for (var i = 0; i < 99; i++) {
             if(response.statuses[i].place !== null){
-              $("#location").append("<li> Find "+ response.statuses[i].user.name + " @"  +  "<a href=\"https://twitter.com/" + response.statuses[i].user.screen_name + "\">" +response.statuses[i].place.full_name + "</a>" + "</li>");
+              $("#location").append("<li> Find <span>"+ response.statuses[i].user.name +"</span>"+ " @"  +  "<a href=\"https://twitter.com/" + response.statuses[i].user.screen_name + "\">" +response.statuses[i].place.full_name + "</a>" + "</li>");
               $("#profilepic").append("<li><img src=" + response.statuses[i].user.profile_image_url + "></li>");
               $("#tweets").append("<li>" + response.statuses[i].text + "</li>");
               $("#tweets li").addClass("hide");
@@ -68,7 +68,7 @@
       justify-content: center;
     }
     li{
-      height:50px;
+      height:100px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -82,6 +82,9 @@
     #profilepic{
       position:absolute;
       left:20%;
+    }
+    span{
+      color:salmon;
     }
   </style>
   <body>
