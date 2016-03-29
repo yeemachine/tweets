@@ -32,13 +32,7 @@
               $("#profilepic").append("<li><img src=" + response.statuses[i].user.profile_image_url + "></li>");
               $("#tweets").append("<li>" + response.statuses[i].text + "</li>");
               $("#tweets li").addClass("hide");
-              $("#profilepic li").each(function(index, element){
 
-                $(element).hover(function(){
-                  $("#tweets li:nth-child("+(index + 1)+")").toggleClass("hide")
-                })
-
-              })
             }
 
         }
@@ -50,7 +44,13 @@
             // });
 
 
+            $("#profilepic li").each(function(index, element){
 
+              $(element).hover(function(){
+                $("#tweets li:nth-child("+(index + 1)+")").toggleClass("hide")
+              })
+
+            })
 
 
 });
